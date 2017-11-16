@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using Microsoft.Win32;
+using DTO;
 
 namespace Numr
 {
@@ -13,7 +14,7 @@ namespace Numr
     {
         public clientDTO GetMacAddress()
         {
-            clientDTO mac = new Numr.clientDTO();
+            clientDTO mac = new clientDTO();
             foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
             {
                 // Only consider Ethernet network interfaces
@@ -60,5 +61,6 @@ namespace Numr
             string key = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters";
             return  (string)Registry.GetValue(key, "srvcomment", null);
         }
+
     }
 }

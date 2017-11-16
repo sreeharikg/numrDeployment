@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DTO;
+using Numr;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,18 +19,18 @@ namespace Numr
         {
             InitializeComponent();
         }
-        clientDTO dto = new clientDTO();
+        clientDTO currentSystem = new clientDTO();
         Util fun = new Util();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
-            dto=fun.GetMacAddress();
-            dto.ip =fun.GetAllLocalIPv4();
-            dto.name = fun.GetMachineName();
-            dto.pcDescription = fun.GetComputerDescription();
+            currentSystem = fun.GetMacAddress();
+            currentSystem.ip =fun.GetAllLocalIPv4();
+            currentSystem.name = fun.GetMachineName();
+            currentSystem.pcDescription = fun.GetComputerDescription();
         }
         private void loadAllowedMdis()
         {
-            cboModule.DataSource = fun.GetAllAllowedModulesByEthernetMAC(dto.lanMAC);
+            cboModule.DataSource = fun.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
             cboModule.DisplayMember = "ModuleName";
             cboModule.ValueMember = "ModuleID";
         }
