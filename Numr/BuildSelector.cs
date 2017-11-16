@@ -24,6 +24,7 @@ namespace Numr
             dto=fun.GetMacAddress();
             dto.ip =fun.GetAllLocalIPv4();
             dto.name = fun.GetMachineName();
+            dto.pcDescription = fun.GetComputerDescription();
         }
         private void loadAllowedMdis()
         {

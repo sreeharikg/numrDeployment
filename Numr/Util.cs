@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using Microsoft.Win32;
 
 namespace Numr
 {
@@ -53,6 +54,11 @@ namespace Numr
         public List<moduleDTO> GetAllAllowedModulesByEthernetMAC(string mac)
         {
             return null;
+        }
+        public string GetComputerDescription()
+        {
+            string key = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters";
+            return  (string)Registry.GetValue(key, "srvcomment", null);
         }
     }
 }
