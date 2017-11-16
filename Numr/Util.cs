@@ -50,5 +50,9 @@ namespace Numr
         {
             return Environment.MachineName;
         }
+        public List<moduleDTO> GetAllAllowedModulesByEthernetMAC(string mac)
+        {
+            return null;
+        }
     }
 }

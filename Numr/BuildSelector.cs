@@ -27,7 +27,7 @@ namespace Numr
         }
         private void loadAllowedMdis()
         {
-            cboModule.DataSource = fun.GetMacAddress();
+            cboModule.DataSource = fun.GetAllAllowedModulesByEthernetMAC(dto.lanMAC);
             cboModule.DisplayMember = "ModuleName";
             cboModule.ValueMember = "ModuleID";
         }
