@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Lab_Connect
+namespace DAL
 {
     public class DBHelper
     {

@@ -7,7 +7,7 @@ using Npgsql;
 using System.Configuration;
 using System.Windows.Forms;
 
-namespace Lab_Connect
+namespace DAL
 {
     class DbConnection
     {

@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clientRepository.cs" />
     <Compile Include="DbConnection.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="Program.cs" />

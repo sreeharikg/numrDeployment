@@ -1,4 +1,5 @@
-﻿using DTO;
+﻿using DAL;
+using DTO;
 using Numr;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Numr
             InitializeComponent();
         }
         clientDTO currentSystem = new clientDTO();
+        clientRepository clientRepo = new clientRepository();
         Util fun = new Util();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
@@ -27,6 +29,7 @@ namespace Numr
             currentSystem.ip =fun.GetAllLocalIPv4();
             currentSystem.name = fun.GetMachineName();
             currentSystem.pcDescription = fun.GetComputerDescription();
+            currentSystem = clientRepo.RegisterOrUpdateClientDetails(currentSystem);
         }
         private void loadAllowedMdis()
         {
