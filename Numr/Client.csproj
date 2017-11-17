@@ -58,6 +58,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleApplicationDetector.cs" />
     <EmbeddedResource Include="BuildSelector.resx">
       <DependentUpon>BuildSelector.cs</DependentUpon>
     </EmbeddedResource>

@@ -14,6 +14,10 @@ namespace Numr
         [STAThread]
         static void Main()
         {
+            if (SingleApplicationDetector.IsRunning())
+            {
+                return;
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new BuildSelector());

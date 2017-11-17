@@ -38,13 +38,16 @@ namespace Numr
         {
             cboModule.DataSource = moduleRepo.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
             cboModule.DisplayMember = "ModuleName";
-            cboModule.ValueMember = "ModuleID";
+            cboModule.ValueMember = "ModuleCode";
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            moduleDTO app2Open = (moduleDTO) cboModule.SelectedItem;
-            Process.Start(app2Open.pathToBuild);
+            moduleDTO app2Open = (moduleDTO)cboModule.SelectedItem;
+            Process[] pname = Process.GetProcessesByName(app2Open.BuildName.Trim());
+            if (pname.Length != 0)
+                return;
+            Process eg =Process.Start(app2Open.pathToBuild);
         }
 
         private void butto_cancel_Click(object sender, EventArgs e)

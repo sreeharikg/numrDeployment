@@ -17,7 +17,7 @@ namespace DAL
             DBCommand cmd = new DBCommand("select allowed_mdis from client where lan_mac=@lanMAC");
             cmd.Parameters.AddWithValue("@lanMAC", mac);
             string mdiIds = DB.ExecuteScalar(cmd).ToString();
-            using (DBCommand get = new DBCommand("select * from desktop_mdis where id in ("+mdiIds+") and status=1"))
+            using (DBCommand get = new DBCommand("select * from desktop_mdis where mdi_code in ("+mdiIds+") and status=1"))
             {
                 //get.Parameters.AddWithValue("@id", mdiIds);
                 DataTable dt = DB.FillDataTable(get);
@@ -26,9 +26,10 @@ namespace DAL
                     foreach(DataRow dr in dt.Rows)
                     {
                         moduleDTO row = new moduleDTO();
-                        row.ModuleID = dr["id"].ToString();
+                        row.ModuleCode = dr["mdi_code"].ToString();
                         row.ModuleName = dr["name"].ToString();
                         row.pathToBuild = dr["current_path"].ToString();
+                        row.BuildName = dr["build_name"].ToString();
                         allowedModules.Add(row);
                     }
                 }
