@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 
@@ -22,6 +23,7 @@ namespace Numr
         }
         clientDTO currentSystem = new clientDTO();
         clientRepository clientRepo = new clientRepository();
+        moduleRepository moduleRepo = new moduleRepository();
         Util fun = new Util();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
@@ -29,18 +31,25 @@ namespace Numr
             currentSystem.ip =fun.GetAllLocalIPv4();
             currentSystem.name = fun.GetMachineName();
             currentSystem.pcDescription = fun.GetComputerDescription();
-            currentSystem = clientRepo.RegisterOrUpdateClientDetails(currentSystem);
+            clientRepo.RegisterOrUpdateClientDetails(currentSystem);
+            loadAllowedMdis();
         }
         private void loadAllowedMdis()
         {
-            cboModule.DataSource = fun.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
+            cboModule.DataSource = moduleRepo.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
             cboModule.DisplayMember = "ModuleName";
             cboModule.ValueMember = "ModuleID";
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            moduleDTO app2Open = (moduleDTO) cboModule.SelectedItem;
+            Process.Start(app2Open.pathToBuild);
+        }
 
+        private void butto_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

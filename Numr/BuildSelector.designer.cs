@@ -80,6 +80,7 @@
             this.butto_cancel.TabIndex = 6;
             this.butto_cancel.Text = "Exit";
             this.butto_cancel.UseVisualStyleBackColor = false;
+            this.butto_cancel.Click += new System.EventHandler(this.butto_cancel_Click);
             // 
             // btnOpen
             // 

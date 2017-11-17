@@ -52,7 +52,10 @@ namespace Numr
         {
             return Environment.MachineName;
         }
-
+        public List<moduleDTO> GetAllAllowedModulesByEthernetMAC(string mac)
+        {
+            return null;
+        }
         public string GetComputerDescription()
         {
             string key = @"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lanmanserver\parameters";

@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DTO
+namespace Numr
 {
     public class moduleDTO
     {
         public string ModuleName { get; set; }
         public string ModuleID { get; set; }
-        public string pathToBuild { get; set; }
     }
 }
