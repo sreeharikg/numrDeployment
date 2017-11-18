@@ -25,7 +25,7 @@ namespace Numr
         private void frmClientDetails_Load(object sender, EventArgs e)
         {
             loadModules();
-            loadDataToGrid(null,null);
+            loadDataToGrid(null, null);
         }
 
         private void loadModules()
@@ -47,6 +47,20 @@ namespace Numr
             dgvClientRecord.AutoGenerateColumns = false;
             List<clientDTO> list = clientRepo.GetAllClientDataByParam(param);
             dgvClientRecord.DataSource = list;
+        }
+
+        private void dgvClientRecord_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvClientRecord.Columns[e.ColumnIndex].Name == "grdEdit")
+            {
+
+                MessageBox.Show("Test");
+
+            }
+            if (dgvClientRecord.Columns[e.ColumnIndex].Name == "grdDlt")
+            {
+
+            }
         }
     }
 }

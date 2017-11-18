@@ -179,8 +179,9 @@
             this.dgvClientRecord.Name = "dgvClientRecord";
             this.dgvClientRecord.RowHeadersVisible = false;
             this.dgvClientRecord.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClientRecord.Size = new System.Drawing.Size(1353, 564);
+            this.dgvClientRecord.Size = new System.Drawing.Size(1364, 580);
             this.dgvClientRecord.TabIndex = 105;
+            this.dgvClientRecord.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientRecord_CellContentClick);
             // 
             // grdDlt
             // 
@@ -191,7 +192,7 @@
             this.grdDlt.ReadOnly = true;
             this.grdDlt.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.grdDlt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grdDlt.Width = 45;
+            this.grdDlt.Width = 40;
             // 
             // grdEdit
             // 
@@ -202,7 +203,7 @@
             this.grdEdit.ReadOnly = true;
             this.grdEdit.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.grdEdit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.grdEdit.Width = 45;
+            this.grdEdit.Width = 30;
             // 
             // pcNAME
             // 
@@ -223,14 +224,14 @@
             this.lanMAC.DataPropertyName = "lanMAC";
             this.lanMAC.HeaderText = "LAN MAC";
             this.lanMAC.Name = "lanMAC";
-            this.lanMAC.Width = 130;
+            this.lanMAC.Width = 120;
             // 
             // wlanMAC
             // 
             this.wlanMAC.DataPropertyName = "wlanMAC";
             this.wlanMAC.HeaderText = "WIFI MAC";
             this.wlanMAC.Name = "wlanMAC";
-            this.wlanMAC.Width = 130;
+            this.wlanMAC.Width = 120;
             // 
             // allowedModules
             // 
@@ -289,9 +290,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dgvClientRecord);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmClientDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Machine Data";
+            this.Text = "Clients";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmClientDetails_Load);
             this.groupBox1.ResumeLayout(false);
