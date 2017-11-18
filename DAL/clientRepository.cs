@@ -47,12 +47,12 @@ namespace DAL
             sb.Append("select * from client where status=1 and allowed_mdis ilike ('%"+param.moduleCode+"%')");
             if (!string.IsNullOrEmpty(param.ip))
             {
-                sb.Append(" and ip ilike CONCAT(@ip,'%' )");
+                sb.Append(" and current_ip ilike CONCAT(@ip,'%' )");
                 dbCommand.Parameters.AddWithValue("@ip", param.ip);
             }
             if (!string.IsNullOrEmpty(param.name))
             {
-                sb.Append(" and name ilike CONCAT(@name,'%' )");
+                sb.Append(" and name ilike CONCAT('%',@name,'%' )");
                 dbCommand.Parameters.AddWithValue("@name", param.name);
             }
             dbCommand.SQLQuery = sb.ToString();

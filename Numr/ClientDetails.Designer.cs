@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientDetails));
             this.moduleList = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.lblBillNo = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.txtPCname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dgvClientRecord = new System.Windows.Forms.DataGridView();
             this.grdDlt = new System.Windows.Forms.DataGridViewImageColumn();
             this.grdEdit = new System.Windows.Forms.DataGridViewImageColumn();
@@ -86,6 +87,7 @@
             this.btnSearch.TabIndex = 88;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.loadDataToGrid);
             // 
             // txtIP
             // 
@@ -120,16 +122,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Search";
             // 
-            // dataGridViewImageColumn1
-            // 
-            this.dataGridViewImageColumn1.HeaderText = "Delete";
-            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
-            this.dataGridViewImageColumn1.ReadOnly = true;
-            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dataGridViewImageColumn1.Width = 60;
-            // 
             // txtPCname
             // 
             this.txtPCname.Location = new System.Drawing.Point(384, 16);
@@ -147,6 +139,16 @@
             this.label1.Size = new System.Drawing.Size(79, 19);
             this.label1.TabIndex = 108;
             this.label1.Text = "PC NAME";
+            // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "Delete";
+            this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 60;
             // 
             // dgvClientRecord
             // 
@@ -183,6 +185,7 @@
             // grdDlt
             // 
             this.grdDlt.HeaderText = "Delete";
+            this.grdDlt.Image = ((System.Drawing.Image)(resources.GetObject("grdDlt.Image")));
             this.grdDlt.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.grdDlt.Name = "grdDlt";
             this.grdDlt.ReadOnly = true;
@@ -193,6 +196,7 @@
             // grdEdit
             // 
             this.grdEdit.HeaderText = "Edit";
+            this.grdEdit.Image = ((System.Drawing.Image)(resources.GetObject("grdEdit.Image")));
             this.grdEdit.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.grdEdit.Name = "grdEdit";
             this.grdEdit.ReadOnly = true;
