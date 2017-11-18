@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mchineList = new System.Windows.Forms.ComboBox();
+            this.moduleList = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.grdResultList = new System.Windows.Forms.DataGridView();
-            this.txtTestId = new System.Windows.Forms.TextBox();
+            this.txtIP = new System.Windows.Forms.TextBox();
             this.lblBillNo = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtPCname = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dgvClientRecord = new System.Windows.Forms.DataGridView();
             this.grdDlt = new System.Windows.Forms.DataGridViewImageColumn();
             this.grdEdit = new System.Windows.Forms.DataGridViewImageColumn();
             this.pcNAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ip = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lanMAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.wlanMAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SampleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.allowedModules = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.currMAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.currBuild = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Completed_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,27 +52,23 @@
             this.shortNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdResultList)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientRecord)).BeginInit();
             this.SuspendLayout();
             // 
-            // mchineList
+            // moduleList
             // 
-            this.mchineList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mchineList.FormattingEnabled = true;
-            this.mchineList.Items.AddRange(new object[] {
-            "Toshiba TBA-25FR",
-            "Toshiba TBA-40FR",
-            "Cobas E-411",
-            "Pentra"});
-            this.mchineList.Location = new System.Drawing.Point(19, 22);
-            this.mchineList.Name = "mchineList";
-            this.mchineList.Size = new System.Drawing.Size(165, 21);
-            this.mchineList.TabIndex = 87;
+            this.moduleList.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.moduleList.FormattingEnabled = true;
+            this.moduleList.Location = new System.Drawing.Point(19, 22);
+            this.moduleList.Name = "moduleList";
+            this.moduleList.Size = new System.Drawing.Size(165, 21);
+            this.moduleList.TabIndex = 87;
+            this.moduleList.SelectedIndexChanged += new System.EventHandler(this.loadDataToGrid);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.mchineList);
+            this.groupBox1.Controls.Add(this.moduleList);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Location = new System.Drawing.Point(185, 12);
             this.groupBox1.Name = "groupBox1";
@@ -91,44 +87,12 @@
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
             // 
-            // grdResultList
+            // txtIP
             // 
-            this.grdResultList.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
-            this.grdResultList.AllowUserToAddRows = false;
-            this.grdResultList.AllowUserToDeleteRows = false;
-            this.grdResultList.AllowUserToOrderColumns = true;
-            this.grdResultList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.grdDlt,
-            this.grdEdit,
-            this.pcNAME,
-            this.ip,
-            this.lanMAC,
-            this.wlanMAC,
-            this.SampleID,
-            this.currMAC,
-            this.currBuild,
-            this.Completed_date,
-            this.currUSER,
-            this.shortNum,
-            this.Id});
-            this.grdResultList.Cursor = System.Windows.Forms.Cursors.Default;
-            this.grdResultList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.grdResultList.EnableHeadersVisualStyles = false;
-            this.grdResultList.Location = new System.Drawing.Point(1, 92);
-            this.grdResultList.MultiSelect = false;
-            this.grdResultList.Name = "grdResultList";
-            this.grdResultList.RowHeadersVisible = false;
-            this.grdResultList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultList.Size = new System.Drawing.Size(1353, 564);
-            this.grdResultList.TabIndex = 105;
-            // 
-            // txtTestId
-            // 
-            this.txtTestId.Location = new System.Drawing.Point(52, 19);
-            this.txtTestId.Name = "txtTestId";
-            this.txtTestId.Size = new System.Drawing.Size(200, 20);
-            this.txtTestId.TabIndex = 107;
+            this.txtIP.Location = new System.Drawing.Point(52, 19);
+            this.txtIP.Name = "txtIP";
+            this.txtIP.Size = new System.Drawing.Size(200, 20);
+            this.txtIP.TabIndex = 107;
             // 
             // lblBillNo
             // 
@@ -143,10 +107,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txtPCname);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnSearch);
-            this.groupBox2.Controls.Add(this.txtTestId);
+            this.groupBox2.Controls.Add(this.txtIP);
             this.groupBox2.Controls.Add(this.lblBillNo);
             this.groupBox2.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox2.Location = new System.Drawing.Point(582, 12);
@@ -166,12 +130,12 @@
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dataGridViewImageColumn1.Width = 60;
             // 
-            // textBox1
+            // txtPCname
             // 
-            this.textBox1.Location = new System.Drawing.Point(384, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 20);
-            this.textBox1.TabIndex = 109;
+            this.txtPCname.Location = new System.Drawing.Point(384, 16);
+            this.txtPCname.Name = "txtPCname";
+            this.txtPCname.Size = new System.Drawing.Size(200, 20);
+            this.txtPCname.TabIndex = 109;
             // 
             // label1
             // 
@@ -183,6 +147,38 @@
             this.label1.Size = new System.Drawing.Size(79, 19);
             this.label1.TabIndex = 108;
             this.label1.Text = "PC NAME";
+            // 
+            // dgvClientRecord
+            // 
+            this.dgvClientRecord.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
+            this.dgvClientRecord.AllowUserToAddRows = false;
+            this.dgvClientRecord.AllowUserToDeleteRows = false;
+            this.dgvClientRecord.AllowUserToOrderColumns = true;
+            this.dgvClientRecord.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientRecord.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.grdDlt,
+            this.grdEdit,
+            this.pcNAME,
+            this.ip,
+            this.lanMAC,
+            this.wlanMAC,
+            this.allowedModules,
+            this.currMAC,
+            this.currBuild,
+            this.Completed_date,
+            this.currUSER,
+            this.shortNum,
+            this.Id});
+            this.dgvClientRecord.Cursor = System.Windows.Forms.Cursors.Default;
+            this.dgvClientRecord.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.dgvClientRecord.EnableHeadersVisualStyles = false;
+            this.dgvClientRecord.Location = new System.Drawing.Point(1, 92);
+            this.dgvClientRecord.MultiSelect = false;
+            this.dgvClientRecord.Name = "dgvClientRecord";
+            this.dgvClientRecord.RowHeadersVisible = false;
+            this.dgvClientRecord.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvClientRecord.Size = new System.Drawing.Size(1353, 564);
+            this.dgvClientRecord.TabIndex = 105;
             // 
             // grdDlt
             // 
@@ -232,12 +228,12 @@
             this.wlanMAC.Name = "wlanMAC";
             this.wlanMAC.Width = 130;
             // 
-            // SampleID
+            // allowedModules
             // 
-            this.SampleID.DataPropertyName = "sampleId";
-            this.SampleID.HeaderText = "ALLOWED MODULES";
-            this.SampleID.Name = "SampleID";
-            this.SampleID.Width = 200;
+            this.allowedModules.DataPropertyName = "allowedModules";
+            this.allowedModules.HeaderText = "ALLOWED MODULES";
+            this.allowedModules.Name = "allowedModules";
+            this.allowedModules.Width = 200;
             // 
             // currMAC
             // 
@@ -287,7 +283,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1354, 525);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.grdResultList);
+            this.Controls.Add(this.dgvClientRecord);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmClientDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -295,32 +291,32 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmClientDetails_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grdResultList)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientRecord)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ComboBox mchineList;
+        private System.Windows.Forms.ComboBox moduleList;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DataGridView grdResultList;
-        private System.Windows.Forms.TextBox txtTestId;
+        private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.Label lblBillNo;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtPCname;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvClientRecord;
         private System.Windows.Forms.DataGridViewImageColumn grdDlt;
         private System.Windows.Forms.DataGridViewImageColumn grdEdit;
         private System.Windows.Forms.DataGridViewTextBoxColumn pcNAME;
         private System.Windows.Forms.DataGridViewTextBoxColumn ip;
         private System.Windows.Forms.DataGridViewTextBoxColumn lanMAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn wlanMAC;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SampleID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn allowedModules;
         private System.Windows.Forms.DataGridViewTextBoxColumn currMAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn currBuild;
         private System.Windows.Forms.DataGridViewTextBoxColumn Completed_date;

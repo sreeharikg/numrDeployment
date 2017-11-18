@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Models\clientDTO.cs" />
     <Compile Include="Models\moduleDTO.cs" />
+    <Compile Include="Models\searchParam.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

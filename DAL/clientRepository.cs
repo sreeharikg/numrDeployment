@@ -38,5 +38,44 @@ namespace DAL
             commands.Add(updateCMD);
             var result = DB.ExecuteNonQueriesInTransaction(commands);
         }
+
+        public List<clientDTO> GetAllClientDataByParam(searchParam param)
+        {
+            List<clientDTO> Modules = new List<clientDTO>();
+            StringBuilder sb = new StringBuilder();
+            DBCommand dbCommand = new DBCommand();
+            sb.Append("select * from client where status=1 and allowed_mdis ilike ('%"+param.moduleCode+"%')");
+            if (!string.IsNullOrEmpty(param.ip))
+            {
+                sb.Append(" and ip ilike CONCAT(@ip,'%' )");
+                dbCommand.Parameters.AddWithValue("@ip", param.ip);
+            }
+            if (!string.IsNullOrEmpty(param.name))
+            {
+                sb.Append(" and name ilike CONCAT(@name,'%' )");
+                dbCommand.Parameters.AddWithValue("@name", param.name);
+            }
+            dbCommand.SQLQuery = sb.ToString();
+            DataTable dt = DB.FillDataTable(dbCommand);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    clientDTO row = new clientDTO();
+                    row.id = dr["id"].ToString();
+                    row.name = dr["name"].ToString();
+                    row.ip = dr["current_ip"].ToString();
+                    row.allowedModules = dr["allowed_mdis"].ToString();
+                    row.currentBuild = dr["current_build_version"].ToString();
+                    row.currentMAC = dr["current_mac"].ToString();
+                    row.currentUser = dr["current_user"].ToString();
+                    row.lanMAC = dr["lan_mac"].ToString();
+                    row.wlanMAC = dr["wlan_mac"].ToString();
+                    row.pcDescription = dr["pc_description"].ToString();
+                    Modules.Add(row);
+                }
+            }
+            return Modules;
+        }
     }
 }

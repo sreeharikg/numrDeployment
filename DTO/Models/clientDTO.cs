@@ -8,6 +8,7 @@ namespace DTO
 {
     public class clientDTO
     {
+        public string id { get; set; }
         public string name { get; set; }
         public string ip { get; set; }
         public string lanMAC { get; set; }
@@ -16,6 +17,8 @@ namespace DTO
         public string currentMAC { get; set; }
         public DateTime loggedDATE { get; set; }
         public string pcDescription { get; set; }
-        //public string name { get; set; }
+        public string currentUser { get; set; }
+        public string allowedModules { get; set; }
+        public string currentBuild { get; set; }
     }
 }
