@@ -23,9 +23,9 @@ namespace DAL
                         MessageBox.Show("error:not establish connection");
                         throw new Exception("can't read connection");
                     }
-
-
-                    con = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["TiaHMSConnection"].ConnectionString);
+                    string conStr = ConfigurationManager.ConnectionStrings["TiaHMSConnection"].ConnectionString;
+                    conStr = new Numr.Util().DecryptCipherTextToPlainText(conStr);
+                    con = new NpgsqlConnection(conStr);
                 }
                 return con;
             }
