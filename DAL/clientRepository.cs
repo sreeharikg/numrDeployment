@@ -22,7 +22,7 @@ namespace DAL
                 DataTable dt = DB.FillDataTable(cmd);
             if (dt.Rows.Count == 0)
             {
-                cmd = new DBCommand("insert into client (name,lan_mac,wlan_mac,pc_description) values (@name,@lanMAC,@wlanMAC,@PCdesc)");
+                cmd = new DBCommand("insert into client (name,lan_mac,wlan_mac,pc_description,created_at) values (@name,@lanMAC,@wlanMAC,@PCdesc,now()::timestamp(0))");
                 cmd.Parameters.AddWithValue("@lanMAC", currentClient.lanMAC);
                 cmd.Parameters.AddWithValue("@wlanMAC", currentClient.wlanMAC);
                 cmd.Parameters.AddWithValue("@name", currentClient.name);
