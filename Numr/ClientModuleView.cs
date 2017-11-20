@@ -68,5 +68,7 @@ namespace Numr
             if (clientRepo.UpdateClientAllowedModules(selectedClient))
                 MessageBox.Show("Updated.");
         }
+
+
     }
 }

@@ -47,7 +47,7 @@
             this.groupBox2.Size = new System.Drawing.Size(403, 310);
             this.groupBox2.TabIndex = 100;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Test Details";
+            this.groupBox2.Text = "Allowed Modules";
             // 
             // chkDenyModule
             // 
