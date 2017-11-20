@@ -66,6 +66,8 @@ namespace DAL
                     row.name = dr["name"].ToString();
                     row.ip = dr["current_ip"].ToString();
                     row.allowedModules = dr["allowed_mdis"].ToString();
+                    foreach (string code in row.allowedModules.Split(','))
+                        row.allowedModulesList.Add(new moduleRepository().GetAllModulesByStatus().Where(x => x.ModuleCode == code.Replace("'", "")).FirstOrDefault());
                     row.currentBuild = dr["current_build_version"].ToString();
                     row.currentMAC = dr["current_mac"].ToString();
                     row.currentUser = dr["current_user"].ToString();
@@ -76,6 +78,22 @@ namespace DAL
                 }
             }
             return Modules;
+        }
+
+        public bool UpdateClientAllowedModules(clientDTO clientToUpdate)
+        {
+            using (DBCommand updateCMD = new DBCommand("update client set allowed_mdis=@allowedModules where lan_mac=@lanMAC"))
+            {
+                updateCMD.Parameters.AddWithValue("@lanMAC", clientToUpdate.lanMAC);
+                updateCMD.Parameters.AddWithValue("@allowedModules", clientToUpdate.allowedModules);
+                commands.Add(updateCMD);
+                var result = DB.ExecuteNonQueriesInTransaction(commands);
+                if (result.IsSucceess)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

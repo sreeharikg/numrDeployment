@@ -53,9 +53,12 @@ namespace Numr
         {
             if (dgvClientRecord.Columns[e.ColumnIndex].Name == "grdEdit")
             {
-
-                MessageBox.Show("Test");
-
+                ClientModuleView frm = new Numr.ClientModuleView(); 
+                frm.selectedClient=(clientDTO)dgvClientRecord.CurrentRow.DataBoundItem;
+                if (frm.ShowDialog(this) == DialogResult.Cancel)
+                {
+                    loadDataToGrid(null, null);
+                }
             }
             if (dgvClientRecord.Columns[e.ColumnIndex].Name == "grdDlt")
             {
