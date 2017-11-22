@@ -95,5 +95,55 @@ namespace DAL
             }
             return false;
         }
+        public CompanyDetails GetCompanydetails()
+        {
+            List<CompanyDetails> companydetails = new List<CompanyDetails>();
+            using (DBCommand cmd = new DBCommand("select * from company"))
+            {
+                DataTable dt = DB.FillDataTable(cmd);
+
+                if (dt.Rows.Count > 0)
+                {
+                    CompanyDetails company = new CompanyDetails();
+                    DataRow dr = dt.Rows[0];
+                    company.Id = Convert.ToString(dr["id"]);
+                    company.Name = Convert.ToString(dr["name"]);
+                    //company.Address = Convert.ToString(dr["address"]).Replace(System.Environment.NewLine, string.Empty);
+                    //company.City = Convert.ToString(dr["city"]);
+                    //company.Pincode = Convert.ToString(dr["pincode"]);
+                    //company.Country = Convert.ToString(dr["country"]);
+                    //company.State = Convert.ToString(dr["state"]);
+                    //company.Created_at = Convert.ToString(dr["created_at"]);
+                    //company.Created_by = Convert.ToString(dr["created_by"]);
+                    //company.Updated_at = Convert.ToString(dr["updated_at"]);
+                    //company.Updated_by = Convert.ToString(dr["updated_by"]);
+                    //company.Status = Convert.ToString(dr["status"]);
+                    //company.Phone = Convert.ToString(dr["phone"]);
+                    //company.Booking_no = Convert.ToString(dr["booking_no"]);
+                    //company.Gst_no = Convert.ToString(dr["gst_no"]);
+                    //company.View_status = Convert.ToInt32(dr["view_status"]);
+                    //byte[] picData = dr["bgimg"] as byte[] ?? null;
+
+                    //if (picData != null)
+                    //{
+                    //    company.image = picData;
+                    //}
+
+                    byte[] piclogo = dr["logo1"] as byte[] ?? null;
+
+                    if (piclogo != null)
+                    {
+                        company.Logoimg = piclogo;
+                    }
+                  //  company.OPdlno = Convert.ToString(dr["op_dlno"]);
+                  //  company.IPDlno = Convert.ToString(dr["ip_dlno"]);
+                  //  company.OPdlno = Convert.ToString(dr["op_dlno"]);
+                  //  company.IPDlno = Convert.ToString(dr["ip_dlno"]);
+                  ////  company.code = Convert.ToString(dr["company_code"]);
+                    return company;
+                }
+            }
+            return null;
+        }
     }
 }

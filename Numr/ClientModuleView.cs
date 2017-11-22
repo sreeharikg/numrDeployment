@@ -67,6 +67,8 @@ namespace Numr
                 selectedClient.allowedModules = "0";
             if (clientRepo.UpdateClientAllowedModules(selectedClient))
                 MessageBox.Show("Updated.");
+            else
+                MessageBox.Show("Failed!");
         }
 
 
