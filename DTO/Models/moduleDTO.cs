@@ -11,7 +11,9 @@ namespace DTO
         public string ModuleName { get; set; }
         public string ModuleID { get; set; }
         public string pathToBuild { get; set; }
+        public string pathToBuildSecondary { get; set; }
         public string ModuleCode { get; set; }
         public string BuildName { get; set; }
+        public string BuildVersion { get; set; }
     }
 }

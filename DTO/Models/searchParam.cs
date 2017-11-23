@@ -12,6 +12,7 @@ namespace DTO
         public string name { get; set; }
         public string lanMAC { get; set; }
         public string moduleCode { get; set; }
-        //public string ip { get; set; }
+        public string allowedMdiIds { get; set; }
+        public string clientId { get; set; }
     }
 }

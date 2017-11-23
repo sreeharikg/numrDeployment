@@ -47,7 +47,7 @@
             // 
             this.label1.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label1.Location = new System.Drawing.Point(407, 326);
+            this.label1.Location = new System.Drawing.Point(393, 326);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 23);
             this.label1.TabIndex = 0;
@@ -64,7 +64,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.Location = new System.Drawing.Point(547, 0);
+            this.panel2.Location = new System.Drawing.Point(541, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(10, 364);
             this.panel2.TabIndex = 8;
@@ -89,7 +89,7 @@
             // 
             this.lblCompany.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompany.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.lblCompany.Location = new System.Drawing.Point(182, 23);
+            this.lblCompany.Location = new System.Drawing.Point(188, 31);
             this.lblCompany.Name = "lblCompany";
             this.lblCompany.Size = new System.Drawing.Size(230, 23);
             this.lblCompany.TabIndex = 14;
@@ -99,21 +99,24 @@
             // 
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Image = global::Numr.Properties.Resources.exit_button;
-            this.pictureBox2.Location = new System.Drawing.Point(15, 321);
+            this.pictureBox2.Location = new System.Drawing.Point(15, 300);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(39, 28);
+            this.pictureBox2.Size = new System.Drawing.Size(60, 49);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.exit_Click);
+            this.pictureBox2.MouseEnter += new System.EventHandler(this.pictureBox2_MouseHover);
+            this.pictureBox2.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
+            this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseHover);
             // 
             // logoCompany
             // 
             this.logoCompany.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logoCompany.Image = global::Numr.Properties.Resources.tia_logo;
-            this.logoCompany.Location = new System.Drawing.Point(143, 19);
+            this.logoCompany.Location = new System.Drawing.Point(116, 19);
             this.logoCompany.Name = "logoCompany";
-            this.logoCompany.Size = new System.Drawing.Size(39, 28);
+            this.logoCompany.Size = new System.Drawing.Size(66, 45);
             this.logoCompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoCompany.TabIndex = 15;
             this.logoCompany.TabStop = false;
@@ -122,7 +125,7 @@
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Image = global::Numr.Properties.Resources.tia_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(368, 322);
+            this.pictureBox1.Location = new System.Drawing.Point(354, 322);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(39, 28);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -134,7 +137,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(104)))), ((int)(((byte)(100)))));
-            this.ClientSize = new System.Drawing.Size(556, 367);
+            this.ClientSize = new System.Drawing.Size(551, 367);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.logoCompany);
             this.Controls.Add(this.lblCompany);

@@ -32,8 +32,8 @@ namespace Numr
             ((ListBox)chklstModules).DataSource = list;
             ((ListBox)chklstModules).DisplayMember = "ModuleName";
             ((ListBox)chklstModules).ValueMember = "ModuleCode";
-
-            foreach (moduleDTO module in selectedClient.allowedModulesList)
+            List<moduleDTO> allowed = clientRepo.GetAllModulesAllowedByClient(new searchParam { clientId = selectedClient.id });
+            foreach (moduleDTO module in allowed)
             {
                 if (module != null)
                 {
@@ -57,14 +57,11 @@ namespace Numr
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            selectedClient.allowedModules = null;
+            selectedClient.allowedModulesList = new List<moduleDTO>();
             foreach (object itemChecked in chklstModules.CheckedItems)
-                selectedClient.allowedModules += "'" + ((moduleDTO)itemChecked).ModuleCode + "',";
-
-            if (selectedClient.allowedModules != null)
-                selectedClient.allowedModules = selectedClient.allowedModules.Substring(0, selectedClient.allowedModules.Length - 1);
-            else
-                selectedClient.allowedModules = "0";
+                selectedClient.allowedModulesList.Add((moduleDTO)itemChecked);
+            if (selectedClient.allowedModulesList.Count == 0)
+                selectedClient.allowedModulesList.Add(new moduleDTO { ModuleID = "0" });
             if (clientRepo.UpdateClientAllowedModules(selectedClient))
                 MessageBox.Show("Updated.");
             else

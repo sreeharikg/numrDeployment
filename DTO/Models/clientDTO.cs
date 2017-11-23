@@ -19,7 +19,7 @@ namespace DTO
 
         public string wlanMAC { get; set; }
         public string currentMAC { get; set; }
-        public DateTime loggedDATE { get; set; }
+        public string loggedDATE { get; set; }
         public string pcDescription { get; set; }
         public string currentUser { get; set; }
         public string allowedModules { get; set; }

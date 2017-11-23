@@ -22,12 +22,16 @@ namespace DAL
                 DataTable dt = DB.FillDataTable(cmd);
             if (dt.Rows.Count == 0)
             {
-                cmd = new DBCommand("insert into client (name,lan_mac,wlan_mac,pc_description,created_at) values (@name,@lanMAC,@wlanMAC,@PCdesc,now()::timestamp(0))");
+                string id = DB.ExecuteScalar(new DBCommand { SQLQuery = "select nextval('client_id_seq')" }).ToString();
+                cmd = new DBCommand("insert into client (id,name,lan_mac,wlan_mac,pc_description,created_at) values (@Id,@name,@lanMAC,@wlanMAC,@PCdesc,now()::timestamp(0))");
+                cmd.Parameters.AddWithValue("@Id", id);
                 cmd.Parameters.AddWithValue("@lanMAC", currentClient.lanMAC);
                 cmd.Parameters.AddWithValue("@wlanMAC", currentClient.wlanMAC);
                 cmd.Parameters.AddWithValue("@name", currentClient.name);
                 cmd.Parameters.AddWithValue("@PCdesc", currentClient.pcDescription);
                 commands.Add(cmd);
+                DBCommand insert = new DBCommand("insert into client_build (client,build) values (" + id + ", 0)");
+                commands.Add(insert);
             }
             DBCommand updateCMD = new DBCommand("update client set name=@name,pc_description=@PCdesc,current_ip=@currIP,current_mac=@currMAC where lan_mac=@lanMAC");
             updateCMD.Parameters.AddWithValue("@lanMAC", currentClient.lanMAC);
@@ -39,12 +43,44 @@ namespace DAL
             var result = DB.ExecuteNonQueriesInTransaction(commands);
         }
 
+        public List<moduleDTO> GetAllModulesAllowedByClient(searchParam searchParam)
+        {
+            List<moduleDTO> Modules = new List<moduleDTO>();
+            using (DBCommand dbCommand = new DBCommand("select dm.mdi_code,dm.name from client_build cb " +
+                                                        "left join desktop_mdis dm on dm.id = cb.build " +
+                                                        "where cb.client = @client"))
+            {
+                dbCommand.Parameters.AddWithValue("@client", searchParam.clientId);
+                DataTable dt = DB.FillDataTable(dbCommand);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        moduleDTO row = new moduleDTO();
+                        row.ModuleCode = dr["mdi_code"].ToString();
+                        row.ModuleName = dr["name"].ToString();
+                        Modules.Add(row);
+                    }
+                }
+            }
+            return Modules;
+        }
+
         public List<clientDTO> GetAllClientDataByParam(searchParam param)
         {
             List<clientDTO> Modules = new List<clientDTO>();
             StringBuilder sb = new StringBuilder();
             DBCommand dbCommand = new DBCommand();
-            sb.Append("select * from client where status=1 and allowed_mdis ilike ('%"+param.moduleCode+"%')");
+            sb.Append("select c.id,c.name,dm.name as moduleName,c.current_ip,cb.current_build_version,c.current_mac,c.lan_mac,c.wlan_mac,c.pc_description,cb.current_user,cb.last_logged_in from client c " +
+                        "left join client_build cb on cb.client = c.id " +
+                        "left join desktop_mdis dm on dm.id = cb.build " +
+                        "where c.status = 1 and dm.mdi_code ilike '" + param.moduleCode + "'");
+            if(param.moduleCode=="0")
+            {
+                sb.Clear();
+                sb.Append("select null as moduleName,c.id,c.name,c.current_ip,cb.current_build_version,c.current_mac,c.lan_mac,c.wlan_mac,c.pc_description,cb.current_user,cb.last_logged_in from client c "
+                            + " left join client_build cb on cb.client = c.id  where c.status = 1 and cb.build =0");
+            }
             if (!string.IsNullOrEmpty(param.ip))
             {
                 sb.Append(" and current_ip ilike CONCAT(@ip,'%' )");
@@ -52,7 +88,7 @@ namespace DAL
             }
             if (!string.IsNullOrEmpty(param.name))
             {
-                sb.Append(" and name ilike CONCAT('%',@name,'%' )");
+                sb.Append(" and c.name ilike CONCAT('%',@name,'%' )");
                 dbCommand.Parameters.AddWithValue("@name", param.name);
             }
             dbCommand.SQLQuery = sb.ToString();
@@ -65,35 +101,47 @@ namespace DAL
                     row.id = dr["id"].ToString();
                     row.name = dr["name"].ToString();
                     row.ip = dr["current_ip"].ToString();
-                    row.allowedModules = dr["allowed_mdis"].ToString();
-                    foreach (string code in row.allowedModules.Split(','))
-                        row.allowedModulesList.Add(new moduleRepository().GetAllModulesByStatus().Where(x => x.ModuleCode == code.Replace("'", "")).FirstOrDefault());
+                    row.allowedModules = dr["moduleName"].ToString();
                     row.currentBuild = dr["current_build_version"].ToString();
                     row.currentMAC = dr["current_mac"].ToString();
                     row.currentUser = dr["current_user"].ToString();
                     row.lanMAC = dr["lan_mac"].ToString();
                     row.wlanMAC = dr["wlan_mac"].ToString();
                     row.pcDescription = dr["pc_description"].ToString();
+                    row.loggedDATE = dr["last_logged_in"].ToString();
                     Modules.Add(row);
                 }
             }
             return Modules;
         }
 
-        public bool UpdateClientAllowedModules(clientDTO clientToUpdate)
+        public void updateCurrentBuildVersionByMac(clientDTO clientToUpdate)
         {
-            using (DBCommand updateCMD = new DBCommand("update client set allowed_mdis=@allowedModules where lan_mac=@lanMAC"))
+            using (DBCommand updateCMD = new DBCommand("update client set build_version=@version where lan_mac=@lanMAC"))
             {
                 updateCMD.Parameters.AddWithValue("@lanMAC", clientToUpdate.lanMAC);
-                updateCMD.Parameters.AddWithValue("@allowedModules", clientToUpdate.allowedModules);
-                commands.Add(updateCMD);
-                var result = DB.ExecuteNonQueriesInTransaction(commands);
-                if (result.IsSucceess)
-                {
-                    return true;
-                }
+                updateCMD.Parameters.AddWithValue("@version", clientToUpdate.allowedModules);
+                DB.ExecuteNonQuery(updateCMD);
             }
-            return false;
+        }
+
+        public bool UpdateClientAllowedModules(clientDTO clientToUpdate)
+        {
+            DBCommand cmd = new DBCommand("delete from client_build where client=@client");
+            cmd.Parameters.AddWithValue("@client", clientToUpdate.id);
+
+            commands.Add(cmd);
+            foreach (moduleDTO allowedModule in clientToUpdate.allowedModulesList)
+            {
+                DBCommand insert = new DBCommand("insert into client_build (client,build) values ("+clientToUpdate.id+","+ allowedModule.ModuleID + ")");
+                commands.Add(insert);
+            }
+
+            var result = DB.ExecuteNonQueriesInTransaction(commands);
+            if (result.IsSucceess)
+                return true;
+            else
+                return false;
         }
         public CompanyDetails GetCompanydetails()
         {

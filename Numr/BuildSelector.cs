@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DTO;
 using Numr;
+using Numr.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +26,7 @@ namespace Numr
         clientRepository clientRepo = new clientRepository();
         moduleRepository moduleRepo = new moduleRepository();
         Util fun = new Util();
-        List<moduleDTO> list = new List<moduleDTO>();
+        List<moduleDTO> list,allMdis = new List<moduleDTO>();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
             loadFormData();
@@ -35,6 +36,7 @@ namespace Numr
             currentSystem.pcDescription = fun.GetComputerDescription();
             clientRepo.RegisterOrUpdateClientDetails(currentSystem);
             list = moduleRepo.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
+            allMdis = moduleRepo.GetAllModulesByStatus();
             loadAllowedMdis();
         }
 
@@ -42,6 +44,7 @@ namespace Numr
         {
             CompanyDetails com= clientRepo.GetCompanydetails();
             lblCompany.Text = com.Name;
+            if(com.Logoimg!=null)
             using (var ms = new System.IO.MemoryStream(com.Logoimg))
             {
                 logoCompany.Image =  Image.FromStream(ms);
@@ -50,15 +53,17 @@ namespace Numr
 
         private void loadAllowedMdis()
         {
-            for (int i = 0,x=120,y=100; i < list.Count;i++,x+=120)
+            for (int i = 0,x=80,y=120; i < allMdis.Count;i++,x+=150)
             {
                 Button btn = new Button();
-                btn.Text = list[i].ModuleName;
-                btn.Tag = list[i].ModuleCode;
+                btn.Text = allMdis[i].ModuleName;
+                btn.Tag = allMdis[i].ModuleCode;
+                if (list.Where(c => c.ModuleCode == btn.Tag.ToString()).FirstOrDefault() == null)
+                    btn.Enabled = false;
                 btn.BackColor = Color.FromArgb(255, 232, 232);
                 btn.Size = new Size(81, 26);
-                if (!(this.Width / x > 1))
-                { x = 120; y += 50; }
+                if (!(this.Width >= x+25 ))
+                { x = 80; y += 50; }
 
                 btn.Location = new System.Drawing.Point(x, y);
 
@@ -70,23 +75,44 @@ namespace Numr
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            ((Button)sender).Enabled = false;
+            toggleButton(false);
             Cursor.Current = Cursors.WaitCursor;
-            moduleDTO app2Open = list.Where(x => x.ModuleCode == ((Button)sender).Tag.ToString()).FirstOrDefault();
+            moduleDTO app2Open = allMdis.Where(x => x.ModuleCode == ((Button)sender).Tag.ToString()).FirstOrDefault();
             Process[] pname = Process.GetProcessesByName(app2Open.BuildName.Trim());
             if (pname.Length != 0)
             {
-                ((Button)sender).Enabled = true;
+                toggleButton(true);
                 Cursor.Current = Cursors.Default;
                 return;
             }
-            Process p = Process.Start(app2Open.pathToBuild);
-            ((Button)sender).Enabled = true;
+            try
+            {
+                 Process.Start(app2Open.pathToBuild.TrimStart().TrimEnd());
+            }
+            catch(Exception eg)
+            {
+                if (MessageBox.Show("Seems there is no build found in Network.", "Error", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    Process.Start(app2Open.pathToBuildSecondary.TrimStart().TrimEnd());
+            }
+            toggleButton(true);
+            clientRepo.updateCurrentBuildVersionByMac(currentSystem);
         }
+        private void toggleButton(bool enabled)
+        {
+            foreach (Control btn in this.Controls)
+                if (btn.GetType() == typeof(Button))
+                    if (list.Where(c => c.ModuleCode == btn.Tag.ToString()).FirstOrDefault() != null)
+                        btn.Enabled = true;
 
+        }
         private void exit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void pictureBox2_MouseHover(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.Hand;
         }
 
     }

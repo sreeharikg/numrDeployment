@@ -249,14 +249,14 @@
             // 
             // currBuild
             // 
-            this.currBuild.DataPropertyName = "currBuild";
+            this.currBuild.DataPropertyName = "currentBuild";
             this.currBuild.HeaderText = "CURRENT BUILD";
             this.currBuild.Name = "currBuild";
             this.currBuild.Width = 130;
             // 
             // Completed_date
             // 
-            this.Completed_date.DataPropertyName = "completedDate";
+            this.Completed_date.DataPropertyName = "loggedDATE";
             this.Completed_date.HeaderText = "LAST LOGGED IN";
             this.Completed_date.Name = "Completed_date";
             this.Completed_date.ReadOnly = true;
