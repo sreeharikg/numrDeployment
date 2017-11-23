@@ -95,6 +95,7 @@ namespace Numr
                     Process.Start(app2Open.pathToBuildSecondary.TrimStart().TrimEnd());
             }
             toggleButton(true);
+            currentSystem.currentBuild = app2Open.BuildVersion; 
             clientRepo.updateCurrentBuildVersionByMac(currentSystem);
         }
         private void toggleButton(bool enabled)

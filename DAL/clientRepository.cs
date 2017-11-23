@@ -117,10 +117,10 @@ namespace DAL
 
         public void updateCurrentBuildVersionByMac(clientDTO clientToUpdate)
         {
-            using (DBCommand updateCMD = new DBCommand("update client set build_version=@version where lan_mac=@lanMAC"))
+            using (DBCommand updateCMD = new DBCommand("update client_build set current_build_version=@version where client=(select id from client where lan_mac=@lanMAC)"))
             {
                 updateCMD.Parameters.AddWithValue("@lanMAC", clientToUpdate.lanMAC);
-                updateCMD.Parameters.AddWithValue("@version", clientToUpdate.allowedModules);
+                updateCMD.Parameters.AddWithValue("@version", clientToUpdate.currentBuild);
                 DB.ExecuteNonQuery(updateCMD);
             }
         }
