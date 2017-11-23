@@ -29,15 +29,31 @@ namespace Numr
         List<moduleDTO> list,allMdis = new List<moduleDTO>();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
-            loadFormData();
-            currentSystem = fun.GetMacAddress();
-            currentSystem.ip =fun.GetAllLocalIPv4();
-            currentSystem.name = fun.GetMachineName();
-            currentSystem.pcDescription = fun.GetComputerDescription();
-            clientRepo.RegisterOrUpdateClientDetails(currentSystem);
-            list = moduleRepo.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
-            allMdis = moduleRepo.GetAllModulesByStatus();
-            loadAllowedMdis();
+            if (networkAvailable())
+            {
+                loadFormData();
+                currentSystem = fun.GetMacAddress();
+                currentSystem.ip = fun.GetAllLocalIPv4();
+                currentSystem.name = fun.GetMachineName();
+                currentSystem.pcDescription = fun.GetComputerDescription();
+                clientRepo.RegisterOrUpdateClientDetails(currentSystem);
+                list = moduleRepo.GetAllAllowedModulesByEthernetMAC(currentSystem.lanMAC);
+                allMdis = moduleRepo.GetAllModulesByStatus();
+                loadAllowedMdis();
+            }
+        }
+
+        private bool networkAvailable()
+        {
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                return true;
+            else
+            {
+                if (MessageBox.Show("No Network found. Contact IT Department", "Warning", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    if (networkAvailable())
+                        return true;
+            }
+            return false;
         }
 
         private void loadFormData()
