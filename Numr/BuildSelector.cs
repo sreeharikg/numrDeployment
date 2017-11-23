@@ -29,7 +29,8 @@ namespace Numr
         List<moduleDTO> list,allMdis = new List<moduleDTO>();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
-            if (networkAvailable())
+            //this.ShowInTaskbar = false;
+            if (!networkAvailable())
             {
                 loadFormData();
                 currentSystem = fun.GetMacAddress();
@@ -127,8 +128,11 @@ namespace Numr
             this.Close();
         }
 
+
+
         private void pictureBox2_MouseHover(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(pictureBox2, "Exit");
             Cursor.Current = Cursors.Hand;
         }
 
