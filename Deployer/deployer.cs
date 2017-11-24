@@ -68,13 +68,23 @@ namespace Deployer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string dirName =DateTime.Now.ToString("dd-MM-yyyy HH.mm");
-            DirectoryInfo to=Directory.CreateDirectory(txtPathToHost.Text + dirName);
-            DirectoryInfo from = new DirectoryInfo (txtCurrentPath.Text);
-            FileInfo[] files = from.GetFiles();
-            foreach (FileInfo tempfile in files)
+            button1.Enabled = false;
+            try
             {
-                tempfile.CopyTo(Path.Combine(to.FullName, tempfile.Name));
+                DateTime current = new moduleRepository().GetDate();
+                string folderName = current.ToString("dd-MM-yyyy HH.mm");
+                DirectoryInfo to = Directory.CreateDirectory(txtPathToHost.Text +folderName);
+                DirectoryInfo from = new DirectoryInfo(txtCurrentPath.Text);
+                FileInfo[] files = from.GetFiles();
+                foreach (FileInfo tempfile in files)
+                    tempfile.CopyTo(Path.Combine(to.FullName, tempfile.Name));
+
+                new moduleRepository().deployNewBuildByModule(new moduleDTO { pathToBuild = "", BuildVersion = folderName });
+
+            }
+            catch (Exception eg)
+            {
+                MessageBox.Show("Error on deployment "+eg.Data);
             }
         }
     }

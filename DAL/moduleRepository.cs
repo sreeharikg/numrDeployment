@@ -61,5 +61,17 @@ namespace DAL
             }
             return Modules;
         }
+        public DateTime GetDate()
+        {
+            using (DBCommand cmd = new DBCommand("select now()::timestamp"))
+            {
+                return Convert.ToDateTime(DB.ExecuteScalar(cmd));
+            }
+        }
+
+        public void deployNewBuildByModule(moduleDTO moduleDTO)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
