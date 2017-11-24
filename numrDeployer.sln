@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{776447D9-D0F2-43C9-A8C1-DAD963BBFC4C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deployer", "Deployer\Deployer.csproj", "{255908A8-286B-449B-8BF9-350100E424FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B465C91C-1FCF-4F5C-9092-0C56DDAEB4D4} = {B465C91C-1FCF-4F5C-9092-0C56DDAEB4D4}
+		{776447D9-D0F2-43C9-A8C1-DAD963BBFC4C} = {776447D9-D0F2-43C9-A8C1-DAD963BBFC4C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
