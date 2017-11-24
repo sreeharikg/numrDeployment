@@ -71,9 +71,10 @@ namespace DAL
             List<clientDTO> Modules = new List<clientDTO>();
             StringBuilder sb = new StringBuilder();
             DBCommand dbCommand = new DBCommand();
-            sb.Append("select c.id,c.name,dm.name as moduleName,c.current_ip,cb.current_build_version,c.current_mac,c.lan_mac,c.wlan_mac,c.pc_description,cb.current_user,cb.last_logged_in from client c " +
+            sb.Append("select c.id,c.name,dm.name as moduleName,c.current_ip,cb.current_build_version,c.current_mac,c.lan_mac,c.wlan_mac,c.pc_description,u.name as current_user,cb.last_logged_in from client c " +
                         "left join client_build cb on cb.client = c.id " +
                         "left join desktop_mdis dm on dm.id = cb.build " +
+                        "left join users u on u.id = cb.current_user " +
                         "where c.status = 1 and dm.mdi_code ilike '" + param.moduleCode + "'");
             if(param.moduleCode=="0")
             {

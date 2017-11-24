@@ -93,28 +93,31 @@ namespace Numr
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            toggleButton(false);
-            Cursor.Current = Cursors.WaitCursor;
-            moduleDTO app2Open = allMdis.Where(x => x.ModuleCode == ((Button)sender).Tag.ToString()).FirstOrDefault();
-            Process[] pname = Process.GetProcessesByName(app2Open.BuildName.Trim());
-            if (pname.Length != 0)
+            if (networkAvailable())
             {
+                toggleButton(false);
+                Cursor.Current = Cursors.WaitCursor;
+                moduleDTO app2Open = allMdis.Where(x => x.ModuleCode == ((Button)sender).Tag.ToString()).FirstOrDefault();
+                Process[] pname = Process.GetProcessesByName(app2Open.BuildName.Trim());
+                if (pname.Length != 0)
+                {
+                    toggleButton(true);
+                    Cursor.Current = Cursors.Default;
+                    return;
+                }
+                try
+                {
+                    Process.Start(app2Open.pathToBuild.TrimStart().TrimEnd());
+                }
+                catch (Exception eg)
+                {
+                    if (MessageBox.Show("Seems there is no build found in Network.", "Error", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                        Process.Start(app2Open.pathToBuildSecondary.TrimStart().TrimEnd());
+                }
                 toggleButton(true);
-                Cursor.Current = Cursors.Default;
-                return;
+                currentSystem.currentBuild = app2Open.BuildVersion;
+                clientRepo.updateCurrentBuildVersionByMac(currentSystem);
             }
-            try
-            {
-                 Process.Start(app2Open.pathToBuild.TrimStart().TrimEnd());
-            }
-            catch(Exception eg)
-            {
-                if (MessageBox.Show("Seems there is no build found in Network.", "Error", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
-                    Process.Start(app2Open.pathToBuildSecondary.TrimStart().TrimEnd());
-            }
-            toggleButton(true);
-            currentSystem.currentBuild = app2Open.BuildVersion; 
-            clientRepo.updateCurrentBuildVersionByMac(currentSystem);
         }
         private void toggleButton(bool enabled)
         {

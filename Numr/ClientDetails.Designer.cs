@@ -252,7 +252,7 @@
             this.currBuild.DataPropertyName = "currentBuild";
             this.currBuild.HeaderText = "CURRENT BUILD";
             this.currBuild.Name = "currBuild";
-            this.currBuild.Width = 130;
+            this.currBuild.Width = 110;
             // 
             // Completed_date
             // 
@@ -260,7 +260,7 @@
             this.Completed_date.HeaderText = "LAST LOGGED IN";
             this.Completed_date.Name = "Completed_date";
             this.Completed_date.ReadOnly = true;
-            this.Completed_date.Width = 125;
+            this.Completed_date.Width = 135;
             // 
             // currUSER
             // 
