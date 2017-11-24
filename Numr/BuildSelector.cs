@@ -30,7 +30,7 @@ namespace Numr
         private void BuildSelector_Load(object sender, EventArgs e)
         {
             //this.ShowInTaskbar = false;
-            if (!networkAvailable())
+            if (networkAvailable())
             {
                 loadFormData();
                 currentSystem = fun.GetMacAddress();
