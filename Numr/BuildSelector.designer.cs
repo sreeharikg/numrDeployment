@@ -111,6 +111,7 @@
             this.pictureBox2.MouseEnter += new System.EventHandler(this.pictureBox2_MouseHover);
             this.pictureBox2.MouseHover += new System.EventHandler(this.pictureBox2_MouseHover);
             this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseHover);
+            this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseHover);
             // 
             // logoCompany
             // 
@@ -138,7 +139,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(229)))), ((int)(((byte)(215)))));
             this.ClientSize = new System.Drawing.Size(533, 367);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);

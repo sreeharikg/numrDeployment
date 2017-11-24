@@ -129,7 +129,7 @@ namespace Numr
             this.Close();
         }
 
-
+  
 
         private void pictureBox2_MouseHover(object sender, EventArgs e)
         {
