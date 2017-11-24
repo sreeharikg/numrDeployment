@@ -49,16 +49,16 @@
             // 
             this.label1.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label1.Location = new System.Drawing.Point(393, 326);
+            this.label1.Location = new System.Drawing.Point(384, 332);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 23);
+            this.label1.Size = new System.Drawing.Size(130, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "TiaTech-NUMR";
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(-1, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(10, 365);
             this.panel1.TabIndex = 7;
@@ -66,7 +66,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.Location = new System.Drawing.Point(541, 0);
+            this.panel2.Location = new System.Drawing.Point(523, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(10, 364);
             this.panel2.TabIndex = 8;
@@ -89,11 +89,11 @@
             // 
             // lblCompany
             // 
-            this.lblCompany.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompany.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.lblCompany.Location = new System.Drawing.Point(188, 31);
+            this.lblCompany.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(77)))), ((int)(((byte)(165)))));
+            this.lblCompany.Location = new System.Drawing.Point(125, 11);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(230, 23);
+            this.lblCompany.Size = new System.Drawing.Size(281, 32);
             this.lblCompany.TabIndex = 14;
             this.lblCompany.Text = "TiaTech-NUMR";
             // 
@@ -116,10 +116,10 @@
             // 
             this.logoCompany.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.logoCompany.Image = global::Numr.Properties.Resources.tia_logo;
-            this.logoCompany.Location = new System.Drawing.Point(116, 19);
+            this.logoCompany.Location = new System.Drawing.Point(12, 11);
             this.logoCompany.Name = "logoCompany";
-            this.logoCompany.Size = new System.Drawing.Size(66, 45);
-            this.logoCompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoCompany.Size = new System.Drawing.Size(495, 346);
+            this.logoCompany.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.logoCompany.TabIndex = 15;
             this.logoCompany.TabStop = false;
             // 
@@ -127,9 +127,9 @@
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Image = global::Numr.Properties.Resources.tia_logo;
-            this.pictureBox1.Location = new System.Drawing.Point(354, 322);
+            this.pictureBox1.Location = new System.Drawing.Point(351, 330);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(39, 28);
+            this.pictureBox1.Size = new System.Drawing.Size(31, 27);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
@@ -138,17 +138,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(104)))), ((int)(((byte)(100)))));
-            this.ClientSize = new System.Drawing.Size(551, 367);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(533, 367);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblCompany);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.logoCompany);
-            this.Controls.Add(this.lblCompany);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

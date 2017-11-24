@@ -20,7 +20,7 @@ namespace Numr
             }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new frmClientDetails());
+           //Application.Run(new frmClientDetails());
             Application.Run(new BuildSelector());
         }
     }

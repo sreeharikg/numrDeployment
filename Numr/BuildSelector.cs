@@ -29,6 +29,7 @@ namespace Numr
         List<moduleDTO> list,allMdis = new List<moduleDTO>();
         private void BuildSelector_Load(object sender, EventArgs e)
         {
+            
             //this.ShowInTaskbar = false;
             if (networkAvailable())
             {
@@ -77,7 +78,7 @@ namespace Numr
                 btn.Tag = allMdis[i].ModuleCode;
                 if (list.Where(c => c.ModuleCode == btn.Tag.ToString()).FirstOrDefault() == null)
                     btn.Enabled = false;
-                btn.BackColor = Color.FromArgb(255, 232, 232);
+                btn.BackColor = Color.FromArgb(87, 192, 237);
                 btn.Size = new Size(81, 26);
                 if (!(this.Width >= x+25 ))
                 { x = 80; y += 50; }
@@ -86,7 +87,7 @@ namespace Numr
 
                 btn.Click += new EventHandler(btnOpen_Click);
                 this.Controls.Add(btn);
-               // btn.BringToFront();
+                btn.BringToFront();
             }
         }
 
