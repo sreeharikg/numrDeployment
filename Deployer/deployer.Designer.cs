@@ -40,7 +40,7 @@
             // cmbBuild
             // 
             this.cmbBuild.FormattingEnabled = true;
-            this.cmbBuild.Location = new System.Drawing.Point(128, 63);
+            this.cmbBuild.Location = new System.Drawing.Point(93, 38);
             this.cmbBuild.Name = "cmbBuild";
             this.cmbBuild.Size = new System.Drawing.Size(162, 21);
             this.cmbBuild.TabIndex = 0;
@@ -49,7 +49,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 66);
+            this.label1.Location = new System.Drawing.Point(11, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 13);
             this.label1.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(128, 271);
+            this.button1.Location = new System.Drawing.Point(93, 243);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // txtCurrentPath
             // 
-            this.txtCurrentPath.Location = new System.Drawing.Point(93, 135);
+            this.txtCurrentPath.Location = new System.Drawing.Point(93, 110);
             this.txtCurrentPath.Name = "txtCurrentPath";
             this.txtCurrentPath.Size = new System.Drawing.Size(346, 20);
             this.txtCurrentPath.TabIndex = 3;
@@ -76,7 +76,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 138);
+            this.label2.Location = new System.Drawing.Point(11, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 4;
@@ -85,7 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 204);
+            this.label3.Location = new System.Drawing.Point(11, 179);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 13);
             this.label3.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             // txtPathToHost
             // 
-            this.txtPathToHost.Location = new System.Drawing.Point(93, 201);
+            this.txtPathToHost.Location = new System.Drawing.Point(93, 176);
             this.txtPathToHost.Name = "txtPathToHost";
             this.txtPathToHost.Size = new System.Drawing.Size(346, 20);
             this.txtPathToHost.TabIndex = 6;
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(451, 345);
+            this.ClientSize = new System.Drawing.Size(451, 281);
             this.Controls.Add(this.txtPathToHost);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);

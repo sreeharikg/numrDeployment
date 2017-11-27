@@ -75,6 +75,7 @@ namespace Deployer
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;
+            Cursor.Current = Cursors.WaitCursor;
             try
             {
                 DateTime current = new moduleRepository().GetDate();
@@ -82,17 +83,27 @@ namespace Deployer
                 DirectoryInfo to = Directory.CreateDirectory(txtPathToHost.Text +folderName);
                 DirectoryInfo from = new DirectoryInfo(txtCurrentPath.Text);
                 FileInfo[] files = from.GetFiles();
-                foreach (FileInfo tempfile in files)
-                    tempfile.CopyTo(Path.Combine(to.FullName, tempfile.Name));
+                //foreach (FileInfo tempfile in files)
+                //    tempfile.CopyTo(Path.Combine(to.FullName, tempfile.Name));
+
+                foreach (string dirPath in Directory.GetDirectories(from.FullName, "*",
+                    SearchOption.AllDirectories))
+                    Directory.CreateDirectory(dirPath.Replace(from.FullName, to.FullName));
+
+                //Copy all the files & Replaces any files with the same name
+                foreach (string newPath in Directory.GetFiles(from.FullName, "*.*",
+                    SearchOption.AllDirectories))
+                    File.Copy(newPath, newPath.Replace(from.FullName, to.FullName), true);
 
                 new moduleRepository().deployNewBuildByModule(new moduleDTO { pathToBuild = to.FullName+"\\"+txtPathToHost.Tag.ToString(), BuildVersion = folderName,BuildName=txtPathToHost.Tag.ToString().Replace(".exe","") });
-
+                MessageBox.Show("Deployed successfully.","Done");
             }
             catch (Exception eg)
             {
                 MessageBox.Show("Error on deployment "+eg.StackTrace);
-                button1.Enabled = true;
             }
+            button1.Enabled = true;
+            Cursor.Current = Cursors.Default;
         }
     }
 }

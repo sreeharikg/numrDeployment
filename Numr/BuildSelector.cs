@@ -93,10 +93,11 @@ namespace Numr
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if (networkAvailable())
             {
+                allMdis = moduleRepo.GetAllModulesByStatus();
                 toggleButton(false);
-                Cursor.Current = Cursors.WaitCursor;
                 moduleDTO app2Open = allMdis.Where(x => x.ModuleCode == ((Button)sender).Tag.ToString()).FirstOrDefault();
                 Process[] pname = Process.GetProcessesByName(app2Open.BuildName.Trim());
                 if (pname.Length != 0)
@@ -111,7 +112,7 @@ namespace Numr
                 }
                 catch (Exception eg)
                 {
-                    if (MessageBox.Show("Seems there is no build found in Network.", "Error", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
+                    if (MessageBox.Show("Seems there is no build found in Network or something went wrong on build deployment.\nPlease contact IT Department!", "Error", MessageBoxButtons.RetryCancel) == DialogResult.Retry)
                         Process.Start(app2Open.pathToBuildSecondary.TrimStart().TrimEnd());
                 }
                 toggleButton(true);
