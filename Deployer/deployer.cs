@@ -47,21 +47,27 @@ namespace Deployer
             {
                 case "FO":
                     txtPathToHost.Text = @"\\192.168.1.95\savikas\NUMR BUILDS FOR TOOL\FrontOfice\";
+                    txtPathToHost.Tag = "Numr.FrontOffice.exe";
                     break;
                 case "CSH":
                     txtPathToHost.Text = @"\\192.168.1.95\savikas\NUMR BUILDS FOR TOOL\Cash\";
+                    txtPathToHost.Tag = "Numr.CashBilling.exe";
                     break;
                 case "LAB":
                     txtPathToHost.Text = @"\\192.168.1.95\savikas\NUMR BUILDS FOR TOOL\Lab\";
+                    txtPathToHost.Tag = "Numr.Lab.exe";
                     break;
                 case "DSCHRG":
                     txtPathToHost.Text = @"\\192.168.1.95\savikas\NUMR BUILDS FOR TOOL\Discharge\";
+                    txtPathToHost.Tag = "Numr.Discharge.exe";
                     break;
                 case "BLL":
                     txtPathToHost.Text = @"\\192.168.1.95\savikas\NUMR BUILDS FOR TOOL\Billing\";
+                    txtPathToHost.Tag = "Numr.Billing.exe";
                     break;
                 case "PHY":
                     txtPathToHost.Text = @"\\192.168.1.95\savikas\NUMR BUILDS FOR TOOL\Pharmacy\";
+                    txtPathToHost.Tag = "Numr.Pharmacy.exe";
                     break;
             }
         }
@@ -79,12 +85,13 @@ namespace Deployer
                 foreach (FileInfo tempfile in files)
                     tempfile.CopyTo(Path.Combine(to.FullName, tempfile.Name));
 
-                new moduleRepository().deployNewBuildByModule(new moduleDTO { pathToBuild = "", BuildVersion = folderName });
+                new moduleRepository().deployNewBuildByModule(new moduleDTO { pathToBuild = to.FullName+"\\"+txtPathToHost.Tag.ToString(), BuildVersion = folderName,BuildName=txtPathToHost.Tag.ToString().Replace(".exe","") });
 
             }
             catch (Exception eg)
             {
-                MessageBox.Show("Error on deployment "+eg.Data);
+                MessageBox.Show("Error on deployment "+eg.StackTrace);
+                button1.Enabled = true;
             }
         }
     }

@@ -71,7 +71,13 @@ namespace DAL
 
         public void deployNewBuildByModule(moduleDTO moduleDTO)
         {
-            throw new NotImplementedException();
+            using (DBCommand set = new DBCommand("update desktop_mdis set current_path=@pathToBuild , build_version=@version, deployment_date=now()::timestamp where build_name=@moduleName"))
+            {
+                set.Parameters.AddWithValue("@pathToBuild", moduleDTO.pathToBuild);
+                set.Parameters.AddWithValue("@version", moduleDTO.BuildVersion);
+                set.Parameters.AddWithValue("@moduleName", moduleDTO.BuildName);
+                var result = DB.ExecuteNonQuery(set);
+            }
         }
     }
 }
