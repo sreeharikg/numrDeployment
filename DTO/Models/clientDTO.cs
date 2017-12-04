@@ -26,6 +26,6 @@ namespace DTO
         public List<moduleDTO> allowedModulesList { get; set; }
         public string[] allowedModulesArray { get; set; }
         public string currentBuild { get; set; }
-
+        public string currentModuleId { get; set; }
     }
 }

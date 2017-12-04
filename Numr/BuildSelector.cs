@@ -117,6 +117,7 @@ namespace Numr
                 }
                 toggleButton(true);
                 currentSystem.currentBuild = app2Open.BuildVersion;
+                currentSystem.currentModuleId = app2Open.ModuleID;
                 clientRepo.updateCurrentBuildVersionByMac(currentSystem);
             }
         }
