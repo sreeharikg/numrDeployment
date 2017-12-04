@@ -245,7 +245,7 @@
             this.currMAC.DataPropertyName = "currentMAC";
             this.currMAC.HeaderText = "CURRENT MAC";
             this.currMAC.Name = "currMAC";
-            this.currMAC.Width = 130;
+            this.currMAC.Width = 120;
             // 
             // currBuild
             // 
@@ -271,8 +271,9 @@
             // shortNum
             // 
             this.shortNum.DataPropertyName = "pcDescription";
-            this.shortNum.HeaderText = "SHORT NUMBER";
+            this.shortNum.HeaderText = "SHORT NUMBER/ Teamviewer ID";
             this.shortNum.Name = "shortNum";
+            this.shortNum.Width = 110;
             // 
             // Id
             // 
