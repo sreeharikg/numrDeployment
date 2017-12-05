@@ -71,9 +71,10 @@ namespace DAL
 
         public void deployNewBuildByModule(moduleDTO moduleDTO)
         {
-            using (DBCommand set = new DBCommand("update desktop_mdis set current_path=@pathToBuild , build_version=@version, deployment_date=now()::timestamp where build_name=@moduleName"))
+            using (DBCommand set = new DBCommand("update desktop_mdis set current_path=@pathToBuild,secondary_path=@pathToBuild2 , build_version=@version, deployment_date=now()::timestamp where build_name=@moduleName"))
             {
                 set.Parameters.AddWithValue("@pathToBuild", moduleDTO.pathToBuild);
+                set.Parameters.AddWithValue("@pathToBuild2", moduleDTO.pathToBuildSecondary);
                 set.Parameters.AddWithValue("@version", moduleDTO.BuildVersion);
                 set.Parameters.AddWithValue("@moduleName", moduleDTO.BuildName);
                 var result = DB.ExecuteNonQuery(set);

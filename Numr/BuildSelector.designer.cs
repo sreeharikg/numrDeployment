@@ -93,7 +93,7 @@
             this.lblCompany.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(77)))), ((int)(((byte)(165)))));
             this.lblCompany.Location = new System.Drawing.Point(125, 11);
             this.lblCompany.Name = "lblCompany";
-            this.lblCompany.Size = new System.Drawing.Size(281, 32);
+            this.lblCompany.Size = new System.Drawing.Size(287, 32);
             this.lblCompany.TabIndex = 14;
             this.lblCompany.Text = "TiaTech-NUMR";
             // 
